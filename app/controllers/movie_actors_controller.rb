@@ -1,0 +1,2 @@
+class MovieActors < ApplicationController
+end

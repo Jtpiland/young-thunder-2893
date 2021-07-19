@@ -5,6 +5,7 @@ RSpec.describe 'Movies Show Page' do
     @universal = Studio.create!(name: 'Universal Studios', location: 'Hollywood')
     @raiders = @universal.movies.create!(title: 'Raiders of the Lost Ark', creation_year: 1981, genre: 'Action/Adventure')
     @shrek = @universal.movies.create!(title: 'Shrek', creation_year: 2001, genre: 'Comedy')
+    @harrison = @raiders.actors.create!(name: 'Harrison Ford', age: 78)
 
     visit "/movies/#{@raiders.id}"
   end
@@ -21,6 +22,10 @@ RSpec.describe 'Movies Show Page' do
     expect(page).to_not have_content("#{@shrek.title}")
   end
 
-  it 'can list all the actors in that movie in alphabetical order'
+  it 'can list all the actors in that movie in alphabetical order' do
+    require "pry"; binding.pry
+    expect(page).to have_content(@harrison.name)
+  end
+
   it 'can show the average age of the movies actors'
 end
